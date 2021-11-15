@@ -18,7 +18,7 @@
 
     <title>Login #7</title>
   </head>
-  <body>
+  <body onload="getcookiedata()">
   
 
   
@@ -33,7 +33,7 @@
             <div class="col-md-8">
               <div class="mb-4">
               <h3>Sign In</h3>
-              <p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p>
+              <p class="mb-4"></p>
             </div>
             <form action="#" method="post">
               <div class="form-group first">
@@ -48,10 +48,8 @@
               </div>
               
               <div class="d-flex mb-5 align-items-center">
-                <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
-                  <input type="checkbox" checked="checked"/>
-                  <div class="control__indicator"></div>
-                </label>
+                <input type="checkbox" name="rememberme" id="rememberme" onclick="setcookie()">Remember me
+                
                 <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span> 
               </div>
 
@@ -81,7 +79,41 @@
     </div>
   </div>
 
-  
+ <script type="text/javascript">
+	function setcookie(){
+		var u = document.getElementById('username').value;
+		var p = document.getElementById('password').value;
+
+		document.cookie="myusername="+u+";path=https://vocab-enhancer.herokuapp.com/";
+   		document.cookie="mypassword="+p+";path=https://vocab-enhancer.herokuapp.com/";
+		}
+		
+		function getcookiedata(){
+		console.log(document.cookie);
+		
+		var user=gerCookie('myusername');
+		var pswd=gerCookie('mypassword');
+		
+		document.getElementById('username').value=user;
+		document.getElementById('password').value=pswd;
+
+		function getCookie(cname) {
+		var name = cname + "=";
+		var decodedCookie = decodeURIComponent(document.cookie);
+		var ca = decodedCookie.split(';');
+		for(var i = 0; i<ca.length; i++) {
+		var c =  ca[i];
+		while(c.charAt(0) == ' ') {
+		c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+		return c.substring(name.length, c.length);
+		}
+		}
+		return "";
+	} 
+
+</script>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
